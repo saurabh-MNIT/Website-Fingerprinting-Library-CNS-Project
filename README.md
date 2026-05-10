@@ -1,153 +1,255 @@
-# Website-Fingerprinting-Library (WFlib)
+# Website Fingerprinting Library CNS Project
 
-<p align="center">
-<img src=".\figures\wflib.jpg" height = "180" alt="" align=center />
-<br><br>
-</p>
+## Introduction
 
-**[News]** Our paper on enhancing website fingerprinting adaptability to traffic drift has been accepted by NDSS 2026. Code: https://github.com/Xinhao-Deng/Adaptive-WF-Attack
+This project focuses on Website Fingerprinting attacks using Deep Learning techniques for encrypted traffic analysis.
 
+Website Fingerprinting is a cyber attack technique used to identify which website a user is visiting by analyzing encrypted internet traffic. Even though Tor encrypts the data, attackers can still study packet direction, timing, and traffic patterns.
 
-WFlib is a Pytorch-based open-source library for website fingerprinting attacks, intended for research purposes only.
+This project uses Deep Learning models to identify websites from encrypted traffic.
 
-Website fingerprinting is a type of network attack in which an adversary attempts to deduce which website a user is visiting based on encrypted traffic patterns, even without directly seeing the content of the traffic.
+---
 
-We provide a neat code base to evaluate 11 advanced DL-based WF attacks on multiple datasets. This library is derived from our ACM CCS 2024 paper. If you find this repo useful, please cite our paper.
+## Problem Statement
 
-```bibtex
-@inproceedings{deng2024wflib,
-  title={Robust and Reliable Early-Stage Website Fingerprinting Attacks via Spatial-Temporal Distribution Analysis},
-  author={Deng, Xinhao and Li, Qi and Xu, Ke},
-  booktitle={Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security},
-  year={2024}
-}
+Existing Website Fingerprinting attacks:
+
+- need complete traffic data
+- fail under network changes
+- perform poorly with defenses
+- cannot detect websites early
+
+The goal of this project is to detect websites during the early stage of page loading.
+
+---
+
+## Objectives
+
+- Understand Website Fingerprinting attacks
+- Analyze encrypted traffic patterns
+- Train Deep Learning models
+- Detect websites using early traffic
+- Test attack performance on datasets
+
+---
+
+## What is Holmes?
+
+Holmes is a Deep Learning based Website Fingerprinting attack.
+
+It uses:
+
+- Spatial Analysis
+- Temporal Analysis
+- Contrastive Learning
+
+Holmes can identify which website a user is visiting by analyzing network traffic patterns even before the webpage fully loads.
+
+---
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Python 3.8 | Programming |
+| PyTorch | Deep Learning |
+| NumPy | Data Processing |
+| Scikit-learn | Dataset Splitting |
+| VS Code | Development |
+| WSL Ubuntu | Linux Environment |
+
+---
+
+## Dataset Used
+
+Dataset Used:
+
+```text
+NCDrift_inf.npz
 ```
 
-Contributions via pull requests are welcome and appreciated.
+Dataset Details:
 
-## WFlib Overview
+- 93 website classes
+- 6882 traffic samples
+- sequence length = 5000
 
-The code library includes 11 DL-based website fingerprinting attacks.
+Traffic data contains:
 
-| Attacks | Conference  | Paper | Code |
-|----------|----------|----------|----------|
-| AWF | NDSS 2018 | [Automated Website Fingerprinting through Deep Learning](https://arxiv.org/pdf/1708.06376) | [DLWF](https://github.com/DistriNet/DLWF) |
-| DF | CCS 2018 | [Deep Fingerprinting: Undermining Website Fingerprinting Defenses with Deep Learning](https://dl.acm.org/doi/pdf/10.1145/3243734.3243768) | [df](https://github.com/deep-fingerprinting/df) |
-| Tik-Tok | PETS 2019 | [Tik-Tok: The Utility of Packet Timing in Website Fingerprinting Attacks](https://petsymposium.org/popets/2020/popets-2020-0043.pdf) | [Tik_Tok](https://github.com/msrocean/Tik_Tok) |
-| Var-CNN | PETS 2019 | [Var-CNN: A Data-Efficient Website Fingerprinting Attack Based on Deep Learning](https://arxiv.org/pdf/1802.10215) | [Var-CNN](https://github.com/sanjit-bhat/Var-CNN) |
-| TF | CCS 2019 | [Triplet Fingerprinting: More Practical and Portable Website Fingerprinting with N-shot Learning](https://dl.acm.org/doi/pdf/10.1145/3319535.3354217) | [tf](https://github.com/triplet-fingerprinting/tf) |
-| BAPM | ACSAC 2021 | [BAPM: Block Attention Profiling Model for Multi-tab Website Fingerprinting Attacks on Tor](https://dl.acm.org/doi/pdf/10.1145/3485832.3485891) | None |
-| ARES | S&P 2023 | [Robust Multi-tab Website Fingerprinting Attacks in the Wild](https://arxiv.org/pdf/2501.12622) | [Multitab-WF-Datasets](https://github.com/Xinhao-Deng/Multitab-WF-Datasets) |
-| RF | Security 2023 | [Subverting Website Fingerprinting Defenses with Robust Traffic Representation](https://www.usenix.org/system/files/sec23fall-prepub-621_shen-meng.pdf) | [RF](https://github.com/robust-fingerprinting/RF) |
-| NetCLR | CCS 2023 | [Realistic Website Fingerprinting By Augmenting Network Trace](https://arxiv.org/pdf/2309.10147) | [Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces](https://github.com/SPIN-UMass/Realistic-Website-Fingerprinting-By-Augmenting-Network-Traces) |
-| TMWF | CCS 2023 | [Transformer-based Model for Multi-tab Website Fingerprinting Attack](https://dl.acm.org/doi/abs/10.1145/3576915.3623107) | [TMWF](https://github.com/jzx-bupt/TMWF) |
-| Holmes | CCS 2024 | [Robust and Reliable Early-Stage Website Fingerprinting Attacks via Spatial-Temporal Distribution Analysis](https://arxiv.org/pdf/2407.00918) | [WFlib](https://github.com/Xinhao-Deng/Website-Fingerprinting-Library)|
+- packet direction
+- packet timing information
 
+---
 
-We implemented all attacks using the same framework (Pytorch) and a consistent coding style, enabling researchers to evaluate and compare existing attacks easily.
+## Dataset Splitting
 
-## Usage
+| Dataset | Samples |
+|---|---|
+| Training | 5573 |
+| Validation | 620 |
+| Testing | 689 |
 
-### Install 
+Purpose:
 
-```sh
-git clone git@github.com:Xinhao-Deng/Website-Fingerprinting-Library.git
-pip install --user .
+1. Training → model learning
+2. Validation → tuning
+3. Testing → final evaluation
+
+---
+
+## Project Workflow
+
+```text
+Traffic Dataset
+        ↓
+Preprocessing
+        ↓
+Dataset Splitting
+        ↓
+Feature Extraction
+        ↓
+DF Model Training
+        ↓
+Testing & Evaluation
 ```
 
-**Note**
+---
 
-- Python 3.8 is required.
+## Model Used
 
-### Datasets
+### Deep Fingerprinting (DF)
 
-```sh
-mkdir datasets
+The project uses the DF model.
+
+DF is:
+
+- a CNN-based Deep Learning model
+- designed for Website Fingerprinting attacks
+
+Functions:
+
+- extracts traffic patterns
+- learns encrypted traffic behavior
+- classifies websites
+
+---
+
+## Training Process
+
+Steps performed:
+
+- loaded dataset
+- split dataset
+- trained DF model
+- generated checkpoint file
+
+Generated Model File:
+
+```text
+max_f1.pth
 ```
 
-- Download datasets ([link](https://zenodo.org/records/13732130)) and place it in the folder `./datasets`
+---
 
-| Datasets | # of monitored websites | # of instances | Intro |
-| --- | --- | --- | --- |
-| CW.npz | 95 | 105730 | Closed-world dataset. [Details](https://dl.acm.org/doi/pdf/10.1145/3243734.3243768)|
-| OW.npz |  95 | 146446 | Open-world dataset. [Details](https://dl.acm.org/doi/pdf/10.1145/3243734.3243768) |
-| WTF-PAD.npz | 95 | 105730 | Dataset with WTF-PAD defense. [Details](https://arxiv.org/pdf/1512.00524) |
-| Front.npz |  95 | 95000 | Dataset with Front defense. [Details](https://www.usenix.org/system/files/sec20-gong.pdf) |
-| Walkie-Talkie.npz |  100 | 90000 | Dataset with Walkie-Talkie defense. [Details](https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-wang-tao.pdf) |
-| TrafficSliver.npz |  95 | 95000 | Dataset with TrafficSliver defense. [Details](https://sebastianreuter.info/publications/pdf/ccs-trafficsliver.pdf) |
-| NCDrift_sup.npz |  93 | 21430 | Network condition drift dataset, including superior traces. [Details](https://arxiv.org/pdf/2309.10147) |
-| NCDrift_inf.npz |  93 | 6882 | Network condition drift dataset, including inferior traces. [Details](https://arxiv.org/pdf/2309.10147) |
-| Closed_2tab.npz |  100 | 58000 | 2-tab dataset in the closed-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf) |
-| Closed_3tab.npz |  100 | 58000 | 3-tab dataset in the closed-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf)  |
-| Closed_4tab.npz |  100 | 58000 | 4-tab dataset in the closed-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf)  |
-| Closed_5tab.npz |  100 | 58000 | 5-tab dataset in the closed-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf)  |
-| Open_2tab.npz |  100 | 64000 | 2-tab dataset in the open-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf)  |
-| Open_3tab.npz |  100 | 64000 | 3-tab dataset in the open-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf)  |
-| Open_4tab.npz |  100 | 64000 | 4-tab dataset in the open-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf) |
-| Open_5tab.npz |  100 | 64000 | 5-tab dataset in the open-world scenario. [Details](http://www.thucsnet.com/wp-content/papers/xinhao_sp2023.pdf) |
+## Evaluation Metrics
 
+The following metrics were used:
 
-- The extracted dataset is in npz format and contains two values: X and y. X represents the cell sequence, with values being the direction (e.g., 1 or -1) multiplied by the timestamp. y corresponds to the labels. Note that the input of some datasets consists only of direction sequences.
+- Accuracy
+- Precision
+- Recall
+- F1-score
 
-- Divide the dataset into training, validation, and test sets.
+These metrics help measure model performance.
 
-```sh
-# For single-tab datasets
-python exp/dataset_process/dataset_split.py --dataset CW
-# For multi-tab datasets
-python exp/dataset_process/dataset_split.py --dataset Closed_2tab --use_stratify False
+---
+
+## Final Results
+
+| Metric | Result |
+|---|---|
+| Accuracy | 47.61% |
+| Precision | 21.75% |
+| Recall | 25.86% |
+| F1-score | 20.89% |
+
+The model successfully classified encrypted traffic patterns.
+
+---
+
+## How to Run
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate
 ```
 
-### Training \& Evaluation
+### Install Dependencies
 
-We provide all experiment scripts for WF attacks in the folder `./scripts/`. For example, you can reproduce the DF attack on the CW dataset by executing the following command.
+```bash
+pip install -r requirements.txt
+```
 
-```sh
+### Run Dataset Splitting
+
+```bash
+python exp/dataset_process/dataset_split.py --dataset NCDrift_inf
+```
+
+### Train Model
+
+```bash
 bash scripts/DF.sh
 ```
 
-The `./scripts/DF.sh` file contains the commands for model training and evaluation.
+### Test Model
 
-```sh
-dataset=CW
-
-python -u exp/train.py \
-  --dataset ${dataset} \
-  --model DF \
-  --device cuda:1 \
-  --feature DIR \
-  --seq_len 5000 \
-  --train_epochs 30 \
-  --batch_size 128 \
-  --learning_rate 2e-3 \
-  --optimizer Adamax \
-  --eval_metrics Accuracy Precision Recall F1-score \
-  --save_metric F1-score \
-  --save_name max_f1
-
-python -u exp/test.py \
-  --dataset ${dataset} \
-  --model DF \
-  --device cuda:1 \
-  --feature DIR \
-  --seq_len 5000 \
-  --batch_size 256 \
-  --eval_metrics Accuracy Precision Recall F1-score \
-  --load_name max_f1
+```bash
+python exp/test.py --dataset NCDrift_inf --model DF --device cpu
 ```
 
-The meanings of all parameters can be found in the `exp/train.py` and `exp/test.py` files. WFlib supports modifying parameters to easily implement different attacks. Moreover, you can use WFlib to implement combinations of different attacks or perform ablation analysis.
+---
 
-## Contact
-If you have any questions or suggestions, feel free to contact:
+## Novelty Work
 
-- [Xinhao Deng](https://xinhao-deng.github.io/) (xinhaodeng.thu@gmail.com)
-- Yixiang Zhang (zhangyix24@mails.tsinghua.edu.cn)
+The novelty of this project is early-stage website fingerprinting detection.
 
-## Acknowledgements
+Unlike traditional methods that require complete traffic data, this system can identify websites during the initial loading phase.
 
-We would like to thank all the authors of the referenced papers.
-# Website-Fingerprinting-Library
-# Website-Fingerprinting-Library
-# Website-Fingerprinting-Library-CNS-Project
-# Website-Fingerprinting-Library-CNS-Project
+The project improves early detection capability using spatial-temporal distribution analysis and Deep Learning techniques.
+
+---
+
+## Repository Structure
+
+```text
+Website-Fingerprinting-Library-CNS-Project/
+│
+├── checkpoints/
+├── datasets/
+├── exp/
+├── figures/
+├── scripts/
+├── WFlib/
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Acknowledgement
+
+This project is based on the open-source WFlib framework developed by Xinhao Deng and contributors.
+
+The project was further used and analyzed for CNS academic purposes.
+
+---
+
+## Author
+
+Saurabh Kumar  
+B.Tech CSE 3rd Year  
+MNIT Jaipur  
+CNS Project
